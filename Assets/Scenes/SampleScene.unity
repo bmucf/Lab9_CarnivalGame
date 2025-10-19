@@ -340,7 +340,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1661928148
+--- !u!1 &1728211981
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,38 +348,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1661928150}
-  - component: {fileID: 1661928149}
+  - component: {fileID: 1728211983}
+  - component: {fileID: 1728211982}
   m_Layer: 0
-  m_Name: FishBuilder
+  m_Name: FishSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1661928149
+--- !u!114 &1728211982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661928148}
+  m_GameObject: {fileID: 1728211981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d481cc7aa0d1043b793a140bdc4441, type: 3}
+  m_Script: {fileID: 11500000, guid: 43dd18e6fd00c944199326011be5cefb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FishBuilder
-  selectedSprite: 1
---- !u!4 &1661928150
+  m_EditorClassIdentifier: Assembly-CSharp::FishSpawner
+--- !u!4 &1728211983
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661928148}
+  m_GameObject: {fileID: 1728211981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.04424, y: -0.79642, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -391,4 +390,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1661928150}
+  - {fileID: 1728211983}
