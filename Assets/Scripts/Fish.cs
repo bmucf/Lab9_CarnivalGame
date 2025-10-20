@@ -9,7 +9,9 @@ public class Fish : MonoBehaviour
     public float pointValue = 10;
     public float lifetime = 30;
     public FishType fishType = FishType.Orange;
+
     public SpriteRenderer spriteRenderer;
+    public CapsuleCollider2D capsuleCollider;
 
     public class Builder
     {
@@ -49,18 +51,33 @@ public class Fish : MonoBehaviour
         {
             fish.fishType = _fishType;
 
+            // SpriteRenderer setup
             if (fish.spriteRenderer == null)
                 fish.spriteRenderer = fish.gameObject.AddComponent<SpriteRenderer>();
 
-            fish.spriteRenderer.sprite = _sprite;
+            if (_sprite != null)
+                fish.spriteRenderer.sprite = _sprite;
+            else
+                Debug.LogWarning($"No sprite assigned for {_fishType} fish!");
+
+            // Collider setup
+            if (fish.capsuleCollider == null)
+                fish.capsuleCollider = fish.gameObject.AddComponent<CapsuleCollider2D>();
+
+            // Configure the collider
+            fish.capsuleCollider.direction = CapsuleDirection2D.Vertical;
+            fish.capsuleCollider.isTrigger = true; // optional, depends on gameplay
+            fish.capsuleCollider.size = new Vector2(0.8f, 1.2f); // adjust for visuals
+            fish.capsuleCollider.offset = Vector2.zero;
+
             return this;
         }
 
         public Builder WithMovement()
         {
-            FishMovement movement = fish.gameObject.AddComponent<FishMovement>();
-            movement.moveSpeed = fish.speed;
-            movement.lifetime = fish.lifetime;
+            FishMovement move = fish.gameObject.AddComponent<FishMovement>();
+            move.moveSpeed = fish.speed;
+            move.lifetime = fish.lifetime;
             return this;
         }
 

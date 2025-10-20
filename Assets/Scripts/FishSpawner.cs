@@ -6,11 +6,11 @@ public class FishSpawner : MonoBehaviour
     public FishDirector fishDirector;
 
     [Header("Spawn Rates per Fish Type (seconds between spawns)")]
-    public float redSpawnRate = 2f;
-    public float orangeSpawnRate = 3f;
-    public float greenSpawnRate = 4f;
-    public float blueSpawnRate = 5f;
-    public float pinkSpawnRate = 6f;
+    public float redSpawnRate = 9f;
+    public float orangeSpawnRate = 1f;
+    public float greenSpawnRate = 2f;
+    public float blueSpawnRate = 1f;
+    public float pinkSpawnRate = 5f;
     public float brownSpawnRate = 7f;
 
     private Dictionary<FishType, float> spawnTimers;

@@ -63,11 +63,11 @@ public class FishDirector : MonoBehaviour
     {
         switch (type)
         {
-            case FishType.Red: return 3f;
-            case FishType.Orange: return 2f;
+            case FishType.Red: return -1f;
+            case FishType.Orange: return 0f;
             case FishType.Green: return 1f;
-            case FishType.Blue: return 0f;
-            case FishType.Pink: return -1f;
+            case FishType.Blue: return 2f;
+            case FishType.Pink: return 3f;
             case FishType.Brown: return -2f;
             default: return 0f;
         }
