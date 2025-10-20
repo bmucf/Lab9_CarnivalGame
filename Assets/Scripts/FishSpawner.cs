@@ -16,6 +16,8 @@ public class FishSpawner : MonoBehaviour
     private Dictionary<FishType, float> spawnTimers;
     private Dictionary<FishType, float> spawnRates;
 
+    public ScoreManager scoreManager;
+
     private void Start()
     {
         spawnTimers = new Dictionary<FishType, float>();
@@ -51,7 +53,7 @@ public class FishSpawner : MonoBehaviour
 
     private void SpawnFish(FishType type)
     {
-        Fish fish = fishDirector.ConstructFish(type);
-        Debug.Log($"Spawned {type} fish at {Time.time:F1}s");
+        Fish fish = fishDirector.ConstructFish(type, scoreManager);
+        // Debug.Log($"Spawned {type} fish at {Time.time:F1}s");
     }
 }

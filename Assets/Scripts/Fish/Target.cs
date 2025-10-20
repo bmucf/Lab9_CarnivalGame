@@ -28,8 +28,9 @@ public class Target : MonoBehaviour, ISubject
 
     public virtual void OnHit()
     {
-        // Called when bullet hits this target
         NotifyObservers();
-        GetComponent<SpriteRenderer>().color = Color.red; // Visual feedback
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr != null) sr.color = Color.red;
+
     }
 }
