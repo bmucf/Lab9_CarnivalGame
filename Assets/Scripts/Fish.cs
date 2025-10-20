@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
@@ -14,7 +13,12 @@ public class Fish : MonoBehaviour
 
     public class Builder
     {
-        Fish fish = new GameObject("Fish").AddComponent<Fish>();
+        private Fish fish;
+
+        public Builder()
+        {
+            fish = new GameObject("Fish").AddComponent<Fish>();
+        }
 
         public Builder WithSize(float _size)
         {
@@ -44,11 +48,19 @@ public class Fish : MonoBehaviour
         public Builder WithFishType(FishType _fishType, Sprite _sprite)
         {
             fish.fishType = _fishType;
+
             if (fish.spriteRenderer == null)
-            {
                 fish.spriteRenderer = fish.gameObject.AddComponent<SpriteRenderer>();
-            }
+
             fish.spriteRenderer.sprite = _sprite;
+            return this;
+        }
+
+        public Builder WithMovement()
+        {
+            FishMovement movement = fish.gameObject.AddComponent<FishMovement>();
+            movement.moveSpeed = fish.speed;
+            movement.lifetime = fish.lifetime;
             return this;
         }
 
