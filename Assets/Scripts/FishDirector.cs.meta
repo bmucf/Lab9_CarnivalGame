@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 40a82e0ee1142bf4485e7034c5b0b9f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - redFishSprite: {fileID: 2166354338749105061, guid: 6d6dd58a40c1db6408baeeebd1b1a498, type: 3}
+  - orangeFishSprite: {fileID: -1608521514267121277, guid: f6df96ac7e4282744aafd0b55621dbdb, type: 3}
+  - greenFishSprite: {fileID: 4960192699990492036, guid: 0e657223df387f64faa1df757a3f3898, type: 3}
+  - blueFishSprite: {fileID: -4004236341550934336, guid: 60f41df2cbb4f314ebc8aa87c36f2d0b, type: 3}
+  - pinkFishSprite: {fileID: -5877477786225854900, guid: 246d27aca2ee45d4489d015d2efd9606, type: 3}
+  - brownFishSprite: {fileID: -5478135496998406266, guid: 67504deeaa62f4a47a567f759b8f6c87, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
