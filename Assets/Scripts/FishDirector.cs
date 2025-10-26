@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
+using UnityEngine;
 
 public class FishDirector : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class FishDirector : MonoBehaviour
     public Sprite[] fishSprites; // 0=Red, 1=Orange, etc.
 
     private Dictionary<FishType, Sprite> spriteMap;
+
+    public ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -24,24 +27,28 @@ public class FishDirector : MonoBehaviour
         Debug.LogWarning($"No sprite assigned for FishType: {type}");
         return null;
     }
-
-    public Fish ConstructFish(FishType type)
+    public Fish ConstructFish(FishType type, ScoreManager scoreManager)
     {
         Sprite sprite = GetSprite(type);
         float speed = GetSpeedForType(type);
         float height = GetHeightForType(type);
+        int pointValue = GetPointValueForType(type);
 
         Fish fish = new Fish.Builder()
             .WithFishType(type, sprite)
             .WithSize(1f)
             .WithSpeed(speed)
-            .WithPointValue(Random.Range(5, 20))
-            .WithLifetime(30)
-            .WithMovement()
+            .WithPointValue(pointValue)
+            .WithLifetime(30f)
             .Build();
 
-        // Position fish: fixed X = -10, Y depends on type
         fish.transform.position = new Vector3(-10f, height, 0f);
+
+        if (scoreManager != null)
+            fish.RegisterObserver(scoreManager);
+        else
+            Debug.LogWarning("ScoreManager not found; no observer registered.");
+
         return fish;
     }
 
@@ -53,7 +60,7 @@ public class FishDirector : MonoBehaviour
             case FishType.Orange: return 3f;
             case FishType.Green: return 2.5f;
             case FishType.Blue: return 2f;
-            case FishType.Pink: return 1.5f;
+            case FishType.Pink: return 5f;
             case FishType.Brown: return 1f;
             default: return 2f;
         }
@@ -70,6 +77,20 @@ public class FishDirector : MonoBehaviour
             case FishType.Pink: return 3f;
             case FishType.Brown: return -2f;
             default: return 0f;
+        }
+    }
+
+    private int GetPointValueForType(FishType type)
+    {
+        switch (type)
+        {
+            case FishType.Red: return 150;
+            case FishType.Orange: return 100;
+            case FishType.Green: return 75;
+            case FishType.Blue: return 50;
+            case FishType.Pink: return 500;
+            case FishType.Brown: return 10;
+            default: return 0;
         }
     }
 }

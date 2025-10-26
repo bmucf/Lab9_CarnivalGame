@@ -1,43 +1,91 @@
+using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class Fish : MonoBehaviour
+public class Fish : Target
 {
-    private Fish() { }
+    // remove private constructor
 
-    public float size = 1;
-    public float speed = 1;
-    public float pointValue = 10;
-    public float lifetime = 30;
+    private float _speed = 1f;
+    private int _pointValue = 10;
+
+    public override float speed => _speed;
+    public override int pointValue => _pointValue;
+
+    public float size = 1f;
+    public float lifetime = 20f;
     public FishType fishType = FishType.Orange;
 
     public SpriteRenderer spriteRenderer;
     public CapsuleCollider2D capsuleCollider;
 
+    private void Awake()
+    {
+        // Cache components if present, else add them when needed later
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+    }
+
+    public void InitializeAfterBuild()
+    {
+        transform.localScale = Vector3.one * size;
+
+        if (spriteRenderer == null)
+            spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+
+        if (capsuleCollider == null)
+            capsuleCollider = gameObject.AddComponent<CapsuleCollider2D>();
+
+        capsuleCollider.direction = CapsuleDirection2D.Vertical;
+        capsuleCollider.isTrigger = true;
+        capsuleCollider.size = new Vector2(1.6f, 1.6f);
+
+        // Add/ensure movement exists and matches configured values
+        var move = GetComponent<FishMovement>();
+        if (move == null)
+            move = gameObject.AddComponent<FishMovement>();
+
+        move.moveSpeed = speed;
+        move.lifetime = lifetime;
+    }
+
+    public void SetSpeed(float value) => _speed = value;
+    public void SetPointValue(int value) => _pointValue = value;
+
+    public override void OnHit()
+    {
+        NotifyObservers();
+        var sr = spriteRenderer ?? GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.color = Color.red;
+        // Consider playing an effect or disabling visuals here
+    }
+
+    // Builder remains but must call InitializeAfterBuild() in Build()
     public class Builder
     {
         private Fish fish;
 
         public Builder()
         {
-            fish = new GameObject("Fish").AddComponent<Fish>();
+            var go = new GameObject("Fish");
+            fish = go.AddComponent<Fish>();
         }
 
         public Builder WithSize(float _size)
         {
             fish.size = _size;
-            fish.transform.localScale = Vector3.one * _size;
             return this;
         }
 
         public Builder WithSpeed(float _speed)
         {
-            fish.speed = _speed;
+            fish.SetSpeed(_speed);
             return this;
         }
 
-        public Builder WithPointValue(float _pointValue)
+        public Builder WithPointValue(int _pointValue)
         {
-            fish.pointValue = _pointValue;
+            fish.SetPointValue(_pointValue);
             return this;
         }
 
@@ -50,8 +98,6 @@ public class Fish : MonoBehaviour
         public Builder WithFishType(FishType _fishType, Sprite _sprite)
         {
             fish.fishType = _fishType;
-
-            // SpriteRenderer setup
             if (fish.spriteRenderer == null)
                 fish.spriteRenderer = fish.gameObject.AddComponent<SpriteRenderer>();
 
@@ -60,32 +106,14 @@ public class Fish : MonoBehaviour
             else
                 Debug.LogWarning($"No sprite assigned for {_fishType} fish!");
 
-            // Collider setup
-            if (fish.capsuleCollider == null)
-                fish.capsuleCollider = fish.gameObject.AddComponent<CapsuleCollider2D>();
-
-            // Configure the collider
-            fish.capsuleCollider.direction = CapsuleDirection2D.Vertical;
-            fish.capsuleCollider.isTrigger = true; // optional, depends on gameplay
-            fish.capsuleCollider.size = new Vector2(0.8f, 1.2f); // adjust for visuals
-            fish.capsuleCollider.offset = Vector2.zero;
-
             return this;
         }
 
-        public Builder WithMovement()
-        {
-            FishMovement move = fish.gameObject.AddComponent<FishMovement>();
-            move.moveSpeed = fish.speed;
-            move.lifetime = fish.lifetime;
-            return this;
-        }
-
+        // Defer movement component setup to InitializeAfterBuild
         public Fish Build()
         {
+            fish.InitializeAfterBuild();
             return fish;
         }
     }
 }
-
-public enum FishType { Red, Orange, Green, Blue, Pink, Brown }

@@ -1,7 +1,9 @@
 using UnityEngine;
+using TMPro; // for TextMeshProUGUI
 
 public class ScoreManager : MonoBehaviour, IObserver
 {
+    [SerializeField] private TextMeshProUGUI scoreText; // assign in Inspector
     private int score = 0;
 
     public void OnNotify(Target target)
@@ -9,6 +11,14 @@ public class ScoreManager : MonoBehaviour, IObserver
         score += target.pointValue;
         Debug.Log("Score updated: " + score);
 
-        // TODO: Update UI or trigger feedback
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
     }
 }
