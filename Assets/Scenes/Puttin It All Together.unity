@@ -308,6 +308,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &208190858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 208190862}
+  - component: {fileID: 208190861}
+  - component: {fileID: 208190860}
+  - component: {fileID: 208190859}
+  m_Layer: 0
+  m_Name: SaveLoadController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &208190859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208190858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae3247a0713cf741a0fcdd0a3f9d954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreSaver
+  scoreManager: {fileID: 1788181580}
+--- !u!114 &208190860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208190858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2faddfbbb542a23419e916c2d8100823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransformSaver
+  player: {fileID: 240296097}
+  fishSpawner: {fileID: 967040165}
+  scoreManager: {fileID: 1788181580}
+--- !u!114 &208190861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208190858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad843f1e32b21c44bacf81e98acbff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveLoadController
+--- !u!4 &208190862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208190858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.81262, y: 4.45157, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240296095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2380322335590462120, guid: 1d52e2404808c4f40b45f4cebee35196, type: 3}
@@ -327,6 +401,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   bulletPool: {fileID: 1456576034}
   moveSpeed: 6
+--- !u!4 &240296097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1991202812215541887, guid: 1d52e2404808c4f40b45f4cebee35196, type: 3}
+  m_PrefabInstance: {fileID: 1187152293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833241022
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,3 +939,4 @@ SceneRoots:
   - {fileID: 1305526713}
   - {fileID: 1456576035}
   - {fileID: 1187152293}
+  - {fileID: 208190862}
